@@ -1,9 +1,8 @@
-import prisma from "@/prisma";
 import { UserRole } from "@prisma/client";
-
+import User from "@/models/user.model";
 export async function getUsers() {
   try {
-    const users = await prisma.user.findMany();
+    const users = await User.find();
     return users;
   } catch (error) {
     console.log(error);
@@ -20,7 +19,7 @@ interface CreateUserParams {
 export async function createUser(params: CreateUserParams) {
   try {
     const { clerkId, name, email, password, imageUrl } = params;
-    await prisma.user.create({
+    const user = await User.create({
       data: {
         clerkId,
         name: name as string,
