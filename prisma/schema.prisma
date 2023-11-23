@@ -21,10 +21,7 @@ model User {
   comments    Comment[]
   likes       Like[]
   viewedPosts View[]
-  followerId  String    @db.ObjectId
-  follower    Category  @relation(fields: [followerId], references: [id], onDelete: Cascade)
 
-  @@index([followerId])
 }
 
 model Post {
@@ -49,7 +46,6 @@ model Category {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   name      String
   posts     Post[]
-  followers User[]
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }

@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  experimental: {
+    mdxRs: true,
+    serverComponentsExternalPackages: ["prisma"],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
