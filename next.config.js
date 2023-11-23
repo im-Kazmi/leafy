@@ -2,7 +2,7 @@
 const nextConfig = {
   experimental: {
     mdxRs: true,
-    serverComponentsExternalPackages: ["prisma"],
+    serverComponentsExternalPackages: ["mongoose"],
   },
 };
 
