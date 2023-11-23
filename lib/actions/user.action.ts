@@ -1,4 +1,5 @@
 import User from "@/models/user.model";
+
 export async function getUsers() {
   try {
     const users = await User.find();
