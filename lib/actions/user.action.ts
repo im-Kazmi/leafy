@@ -1,4 +1,5 @@
 import User from "@/models/user.model";
+import { connectToDatabasae } from "@/utils/connectDb";
 
 export async function getUsers() {
   try {
@@ -18,6 +19,7 @@ interface CreateUserParams {
 }
 export async function createUser(params: CreateUserParams) {
   try {
+    await connectToDatabasae();
     const { clerkId, name, email, password, imageUrl } = params;
     const user = await User.create({
       data: {
