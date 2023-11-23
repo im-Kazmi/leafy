@@ -28,6 +28,8 @@ export async function createUser(params: CreateUserParams) {
         role: "guest",
       },
     });
+
+    console.log(user);
   } catch (error) {
     console.log(error);
   }
