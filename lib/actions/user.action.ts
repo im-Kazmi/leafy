@@ -1,4 +1,3 @@
-import { UserRole } from "@prisma/client";
 import User from "@/models/user.model";
 export async function getUsers() {
   try {
@@ -25,7 +24,7 @@ export async function createUser(params: CreateUserParams) {
         name: name as string,
         email,
         imageUrl,
-        role: UserRole.GUEST,
+        role: "guest",
       },
     });
   } catch (error) {
