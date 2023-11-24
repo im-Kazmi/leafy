@@ -1,5 +1,5 @@
 import User from "@/models/user.model";
-import { connectToDatabase } from "@/utils/connectDb";
+import connectToDatabase from "@/utils/connectDb";
 
 export async function getUsers() {
   try {

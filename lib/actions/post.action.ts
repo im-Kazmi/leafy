@@ -1,7 +1,9 @@
 import Post from "@/models/post.model";
+import connectToDatabase from "@/utils/connectDb";
 import { auth } from "@clerk/nextjs";
 
 export async function getPosts() {
+  await connectToDatabase();
   try {
     const users = await Post.find();
     return users;
@@ -11,6 +13,7 @@ export async function getPosts() {
 }
 
 export async function createPost(params: any) {
+  await connectToDatabase();
   try {
     const { title, content, category } = params;
     const users = await Post.create({});
