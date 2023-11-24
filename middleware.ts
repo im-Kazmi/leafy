@@ -11,7 +11,7 @@ export default authMiddleware({
     "/webinars",
     "/jobs",
   ],
-  ignoredRoutes: ["/api/webhook", "api/chatgpt", "/api/webhooks(.*)"],
+  ignoredRoutes: ["/api/webhook", "api/chatgpt"],
 });
 
 export const config = {

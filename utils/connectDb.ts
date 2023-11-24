@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export async function connectToDatabasae() {
+export async function connectToDatabase() {
   try {
     const isConnected = mongoose.connection.readyState === 1;
 
