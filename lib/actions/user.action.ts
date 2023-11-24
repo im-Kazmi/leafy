@@ -29,3 +29,36 @@ export async function createUser(params: CreateUserParams) {
     console.log(error);
   }
 }
+
+interface UpdateUserParams {
+  clerkId: string;
+  fullname: string | null;
+  username: string | null;
+  email: string;
+  password?: string;
+  imageUrl: string;
+  role?: string;
+}
+
+export async function updateUser(params: UpdateUserParams) {
+  try {
+    await connectToDatabase();
+    const user = await User.findOneAndUpdate(
+      { clerkId: params.clerkId },
+      params
+    );
+    console.log(user);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function deleteUser(clerkId: string) {
+  try {
+    await connectToDatabase();
+    const user = await User.findOneAndDelete({ clerkId });
+    console.log(user);
+  } catch (error) {
+    console.log(error);
+  }
+}
