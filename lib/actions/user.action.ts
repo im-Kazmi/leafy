@@ -2,6 +2,7 @@ import User from "@/models/user.model";
 import connectToDatabase from "@/utils/connectDb";
 
 export async function getUsers() {
+  await connectToDatabase();
   try {
     const users = await User.find();
     return users;
