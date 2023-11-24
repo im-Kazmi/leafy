@@ -17,20 +17,12 @@ interface CreateUserParams {
   email: string;
   password?: string;
   imageUrl: string;
+  role: string;
 }
 export async function createUser(params: CreateUserParams) {
   try {
     await connectToDatabase();
-    const { clerkId, name, email, password, imageUrl } = params;
-    const user = await User.create({
-      data: {
-        clerkId,
-        name: name as string,
-        email,
-        imageUrl,
-        role: "guest",
-      },
-    });
+    const user = await User.create(params);
     console.log(user);
   } catch (error) {
     console.log(error);

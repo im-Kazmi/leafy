@@ -13,7 +13,7 @@ export interface IUser extends Document {
 const userSchema = new Schema(
   {
     clerkId: String,
-    name: String,
+    name: { type: String },
     imageUrl: String,
     email: {
       type: String,
