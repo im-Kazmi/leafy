@@ -13,11 +13,12 @@ export async function getUsers() {
 
 interface CreateUserParams {
   clerkId: string;
-  name: string | null;
+  fullname: string | null;
+  username: string | null;
   email: string;
   password?: string;
   imageUrl: string;
-  role: string;
+  role?: string;
 }
 export async function createUser(params: CreateUserParams) {
   try {
