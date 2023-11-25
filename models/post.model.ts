@@ -4,8 +4,8 @@ export interface IPost extends Document {
   title: string;
   content: string;
   imageUrl: string;
-  userId: Schema.Types.ObjectId;
-  categoryId: Schema.Types.ObjectId;
+  author: Schema.Types.ObjectId;
+  categories: Schema.Types.ObjectId;
   comments: Schema.Types.ObjectId[];
   likes: Schema.Types.ObjectId[];
 }
@@ -14,14 +14,11 @@ const postSchema = new Schema(
     title: String,
     content: String,
     imageUrl: String,
-    userId: {
+    author: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    categoryId: {
-      type: Schema.Types.ObjectId,
-      ref: "Category",
-    },
+    categories: String,
     likes: [
       {
         type: Schema.Types.ObjectId,
@@ -44,6 +41,6 @@ const postSchema = new Schema(
   { timestamps: true }
 );
 
-const Post = models.Post || model("Post", postSchema);
+const Post = models?.Post || model("Post", postSchema);
 
 export default Post;

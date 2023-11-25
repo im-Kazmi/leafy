@@ -76,6 +76,33 @@
 }
 .gradient {
   background-image: url("/assets/images/bg.svg");
- background-size: cover;
+  background-size: cover;
+}
+.text_gradient {
+  /** TEXT GRADIENT */
+  color: #6eff6b;
+  background-image: -webkit-linear-gradient(0deg, #6eff6b 6%, #ffeb3b 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.text-gradient2 {
+  /** TEXT GRADIENT */
+  color: #ff5722;
+  background-image: -webkit-linear-gradient(45deg, #ff5722 0%, #fff53b 72%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
 
+.text-gradient3 {
+  /** TEXT GRADIENT */
+  color: #ffeb3b;
+  background-image: -webkit-linear-gradient(45deg, #ffeb3b 0%, #38fff2 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
 }

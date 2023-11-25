@@ -15,13 +15,13 @@ interface IThemeContext {
 }
 const themeContext = createContext<IThemeContext | undefined>(undefined);
 const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
     const defaultTheme =
       (localStorage.getItem("theme") &&
         JSON.parse(localStorage.getItem("theme") as string)) ||
-      "dark";
+      "light";
     document.documentElement.classList.add(defaultTheme);
   }, []);
   const handleThemeChange = () => {

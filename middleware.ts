@@ -10,6 +10,7 @@ export default authMiddleware({
     "/book-reviews",
     "/webinars",
     "/jobs",
+    "/api/uploadthing",
   ],
   ignoredRoutes: ["/api/webhook", "api/chatgpt"],
 });

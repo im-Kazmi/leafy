@@ -3,7 +3,7 @@ import { Inter, Poppins, Questrial } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import ThemeContextProvider from "@/context/ThemeContext";
-
+import "./prism.css";
 const inter = Poppins({ subsets: ["latin"], weight: ["400"] });
 
 export const metadata: Metadata = {

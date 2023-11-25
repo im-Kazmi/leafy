@@ -20,6 +20,6 @@ const commentSchema = new Schema(
   { timestamps: true }
 );
 
-const Comment = models.Comment || model("Comment", commentSchema);
+const Comment = models?.Comment || model("Comment", commentSchema);
 
 export default Comment;

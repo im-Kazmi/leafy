@@ -1,5 +1,7 @@
+"use server";
 import User from "@/models/user.model";
 import connectToDatabase from "@/utils/connectDb";
+import { auth } from "@clerk/nextjs";
 
 export async function getUsers() {
   await connectToDatabase();
@@ -20,6 +22,27 @@ interface CreateUserParams {
   imageUrl: string;
   role?: string;
 }
+
+export async function getCurrentUser() {
+  try {
+    await connectToDatabase();
+    const { userId } = auth();
+    if (!userId) {
+      throw new Error("UnAuthorized");
+    }
+
+    const user = await User.findOne({ clerkId: userId });
+
+    if (!user) {
+      throw new Error("user not found");
+    }
+
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function createUser(params: CreateUserParams) {
   try {
     await connectToDatabase();

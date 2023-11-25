@@ -18,6 +18,6 @@ const likeSchema = new Schema(
   { timestamps: true }
 );
 
-const Like = models.Like || model("Like", likeSchema);
+const Like = models?.Like || model("Like", likeSchema);
 
 export default Like;
