@@ -26,7 +26,7 @@ const Navbar2 = () => {
     <div
       className=" flex px-20 h-16 justify-between 
        w-full p
-       fixed bg-white bg-opacity-25 backdrop-blur-lg z-50 items-center
+       fixed  bg-opacity-25 backdrop-blur-lg z-50 items-center
      border-neutral-200 dark:bg-transparent  text-black dark:text-white"
     >
       <div className=" flex gap-3 w-full">
@@ -63,7 +63,7 @@ const Navbar2 = () => {
                       value={topic.name.toLowerCase()}
                       className=""
                     >
-                      {topic.name}
+                      {topic.name.toLowerCase()}
                     </SelectItem>
                   );
                 })}

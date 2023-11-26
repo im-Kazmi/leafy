@@ -50,3 +50,9 @@ export const DashboardNavs = [
     icon: <PiUsersThreeLight />,
   },
 ];
+
+export const postsFilters = [
+  { id: 1, name: "Newest", value: "newest" },
+  { id: 2, name: "Oldest", value: "oldest" },
+  { id: 3, name: "Oldest", value: "oldest" },
+];

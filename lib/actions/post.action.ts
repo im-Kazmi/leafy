@@ -41,3 +41,14 @@ export async function createPost(params: CreatePostParams) {
     console.log(error);
   }
 }
+
+export async function deletePostById(id: string) {
+  await connectToDatabase();
+  try {
+    await Post.findByIdAndDelete(id);
+
+    revalidatePath("/admin/dashboard/blogs");
+  } catch (error) {
+    console.log(error);
+  }
+}

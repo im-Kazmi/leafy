@@ -1,4 +1,5 @@
 import { DashboardNavs } from "@/constants";
+import Link from "next/link";
 import React from "react";
 import { RiSettingsLine } from "react-icons/ri";
 
@@ -13,7 +14,8 @@ const DashboardSidebar = () => {
           <div className=" flex flex-col gap-3">
             {DashboardNavs.map((item) => {
               return (
-                <div
+                <Link
+                  href={item.route}
                   key={item.id}
                   className=" w-full cursor-pointer hover:bg-white py-2 px-3 rounded-sm
               dark:hover:bg-slate-950
@@ -25,7 +27,7 @@ const DashboardSidebar = () => {
                     <span>{item.icon}</span>
                     {item.name}
                   </h1>
-                </div>
+                </Link>
               );
             })}
           </div>

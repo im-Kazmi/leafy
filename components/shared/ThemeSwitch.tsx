@@ -14,7 +14,7 @@ const ThemeSwitch = () => {
         onClick={handleThemeChange}
         className=" m-auto cursor-pointer text-yellow-500"
       >
-        {theme === "dark" ? <IoMdSunny /> : <BsFillMoonStarsFill />}
+        {theme === "dark" ? <BsFillMoonStarsFill /> : <IoMdSunny />}
       </span>
     </div>
   );

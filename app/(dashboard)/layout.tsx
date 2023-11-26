@@ -13,9 +13,10 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <div className=" max-md:hidden">
         <DashboardSidebar />
       </div>
-      <div className=" w-full md:ml-60 flex flex-col items-center px-10 py-5 ">
+
+      <div className=" w-full md:ml-60 flex flex-col items-center  ">
         <DashboardNavbar />
-        {children}
+        <div className="px-10 flex  w-full mt-5">{children}</div>
       </div>
     </div>
   );
