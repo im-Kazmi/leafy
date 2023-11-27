@@ -25,12 +25,13 @@ const EditUserModal = ({ userId, username, userRole }: any) => {
   const [role, setRole] = useState(userRole);
 
   const pathname = usePathname();
-  console.log("value = ", inputValue);
-  console.log("username =", username);
-  console.log(username.toString().trim() == inputValue.trim());
+
   const UpdateUser = async () => {
     try {
-      c;
+      if (username.toString().trim() !== inputValue.trim()) {
+        setError("name mismatched! try again");
+        return;
+      }
       await updateUserRole(JSON.parse(userId), role, pathname);
       setIsOpen(false);
     } catch (error) {
