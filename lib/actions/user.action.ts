@@ -1,7 +1,9 @@
 "use server";
 import User from "@/models/user.model";
 import connectToDatabase from "@/utils/connectDb";
-import { auth } from "@clerk/nextjs";
+import { auth, clerkClient } from "@clerk/nextjs";
+import { connect } from "http2";
+import { revalidatePath } from "next/cache";
 
 export async function getUsers({
   pageSize = 10,
@@ -59,12 +61,6 @@ export async function getCurrentUser() {
 export async function createUser(params: CreateUserParams) {
   try {
     await connectToDatabase();
-
-    const isUserExists = await User.find({ clerkId: params.clerkId });
-
-    if (isUserExists) {
-      throw new Error("user alread exists in database");
-    }
     const user = await User.create(params);
     console.log(user);
   } catch (error) {
@@ -110,16 +106,21 @@ export async function deleteUser(clerkId: string) {
     console.log(error);
   }
 }
-export async function DeleteUserFromDatabase(userId: string) {
+export async function DeleteUserFromDatabase(userId: string, pathname: any) {
   try {
     await connectToDatabase();
-    const isAdmin = await getAdmin();
+    // const isAdmin = await getAdmin();
 
-    if (!isAdmin) {
-      throw new Error("Only admin can modify users");
-    }
-    const user = await User.findByIdAndDelete(userId);
+    // if (!isAdmin) {
+    //   throw new Error("Only admin can modify users");
+    // }
+    const user = await User.findById(userId);
+    await clerkClient.users.deleteUser(user.clerkId);
+
+    await User.findByIdAndDelete(user._id);
     console.log(user);
+
+    revalidatePath(pathname);
   } catch (error) {
     console.log(error);
   }
@@ -137,6 +138,63 @@ export async function getAdmin() {
     }
 
     return admin;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const updateUserRole = async (
+  userId: string,
+  role: string,
+  path: string
+) => {
+  try {
+    await connectToDatabase();
+
+    // const admin = await getAdmin();
+
+    // if (!admin) {
+    //   throw new Error("only admin can modify users!");
+    // }
+
+    const userToUpdate = await User.findByIdAndUpdate(userId, {
+      role,
+    });
+
+    console.log(userToUpdate);
+    revalidatePath(path);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+interface CreateUserWithSessionIfNotExist {
+  clerkId: string;
+}
+
+export async function createUserWithSessionIfNotExist(
+  params: CreateUserWithSessionIfNotExist
+) {
+  try {
+    await connectToDatabase();
+
+    const { clerkId } = params;
+
+    const user = await clerkClient.users.getUser(clerkId);
+
+    const userExists = await User.findOne({ clerkId: user.id });
+
+    if (userExists) {
+      throw new Error("User alread exits dont need to create one");
+    }
+
+    await User.create({
+      clerkId: user.id,
+      fullname: ` ${user.firstName} ${user.lastName ? user.lastName : ""}`,
+      username: user.username!,
+      email: user.emailAddresses[0].emailAddress,
+      imageUrl: user.imageUrl,
+    });
   } catch (error) {
     console.log(error);
   }

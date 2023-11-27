@@ -14,6 +14,7 @@ import { getUsers } from "@/lib/actions/user.action";
 import Image from "next/image";
 import DeleteUserModal from "@/components/modals/delete-user.modal";
 import { auth } from "@clerk/nextjs";
+import EditUserModal from "@/components/modals/edit-user.modal";
 
 const page = async ({ searchParams }: any) => {
   const { users, isNext }: any = await getUsers({
@@ -54,8 +55,13 @@ const page = async ({ searchParams }: any) => {
                 </TableCell>
                 <TableCell className=" ">{user.role}</TableCell>
                 <TableCell className=" flex gap-3">
+                  <EditUserModal
+                    userId={JSON.stringify(user._id)}
+                    username={user.fullname}
+                    userRole={user.role}
+                  />
                   <DeleteUserModal
-                    postId={JSON.stringify(user._id)}
+                    userId={JSON.stringify(user._id)}
                     name={user.fullname}
                   />
                 </TableCell>

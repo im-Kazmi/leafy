@@ -40,13 +40,13 @@ const page = async ({ searchParams }: any) => {
           {posts &&
             posts.length > 0 &&
             posts.map((post: any) => (
-              <TableRow key={post._id} className=" cursor-pointer  ">
+              <TableRow key={post?._id} className=" cursor-pointer  ">
                 <TableCell className="font-medium ">
-                  {post.title.slice(0, 30)}...
+                  {post?.title.slice(0, 30)}...
                 </TableCell>
-                <TableCell className=" ">{post.author.fullname}</TableCell>
+                <TableCell className=" ">{post?.author?.fullname}</TableCell>
                 <TableCell className="">
-                  {moment(post.createdAt).fromNow()}
+                  {moment(post?.createdAt).fromNow()}
                 </TableCell>
                 <TableCell className=" flex gap-3">
                   <Modal

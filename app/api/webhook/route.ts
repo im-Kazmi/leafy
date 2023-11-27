@@ -1,7 +1,12 @@
 import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
-import { createUser, deleteUser, updateUser } from "@/lib/actions/user.action";
+import {
+  createUser,
+  createUserWithSessionIfNotExist,
+  deleteUser,
+  updateUser,
+} from "@/lib/actions/user.action";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -101,6 +106,7 @@ export async function POST(req: Request) {
       user: mongoUser,
     });
   }
+
   console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
   console.log("Webhook body:", body);
 

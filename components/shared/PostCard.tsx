@@ -27,7 +27,7 @@ const PostCard = ({ post }: { post: Post }) => {
     <Card className=" bg-white dark:bg-transparent text-black dark:text-white max-w-[300px] min-h-[400px] max-h-[400px] rounded-xl border-none">
       <CardHeader className=" m-0 p-1 relative ">
         <Image
-          src={post.imageUrl}
+          src={post?.imageUrl}
           width={400}
           height={200}
           alt=""
@@ -38,16 +38,16 @@ const PostCard = ({ post }: { post: Post }) => {
           <h1 className=" text-md">{post.title}</h1>
           <div className=" flex gap-2 items-start mt-2">
             <Image
-              src={post.author.imageUrl}
+              src={post?.author?.imageUrl}
               width={30}
               height={30}
-              alt={post.author.fullname}
+              alt={post?.author?.fullname}
               className=" rounded-full my-auto  "
             />
             <div className="flex flex-col">
-              <h1 className=" text-xs">{post.author.fullname}</h1>
+              <h1 className=" text-xs">{post?.author?.fullname}</h1>
               <span className=" text-[10px]">
-                {moment(post.createdAt).fromNow()}
+                {moment(post?.createdAt).fromNow()}
               </span>
             </div>
           </div>
