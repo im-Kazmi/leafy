@@ -15,12 +15,10 @@ import Image from "next/image";
 import DeleteUserModal from "@/components/modals/delete-user.modal";
 import { auth } from "@clerk/nextjs";
 import EditUserModal from "@/components/modals/edit-user.modal";
+import { getClerkUsers } from "@/lib/actions/clerk.action";
 
 const page = async ({ searchParams }: any) => {
-  const { users, isNext }: any = await getUsers({
-    page: searchParams.page ? +searchParams.page : 1,
-    pageSize: 7,
-  });
+  const users: any = await getClerkUsers();
 
   const { userId } = auth();
   return (
@@ -49,7 +47,9 @@ const page = async ({ searchParams }: any) => {
                     className=" rounded-full"
                   />
                 </TableCell>
-                <TableCell className=" ">{user.fullname}</TableCell>
+                <TableCell className=" ">
+                  {user?.firstName + " " + user?.lastName}
+                </TableCell>
                 <TableCell className="">
                   {moment(user.createdAt).fromNow()}
                 </TableCell>
@@ -62,17 +62,17 @@ const page = async ({ searchParams }: any) => {
                   />
                   <DeleteUserModal
                     userId={JSON.stringify(user._id)}
-                    name={user.fullname}
+                    name={"abid"}
                   />
                 </TableCell>
               </TableRow>
             ))}
         </TableBody>
       </Table>
-      <Pagination
+      {/* <Pagination
         pageNumber={searchParams.page ? +searchParams.page : 1}
         isNext={isNext}
-      />
+      /> */}
     </div>
   );
 };
