@@ -2,14 +2,35 @@
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import DashboardNavbar from "@/components/shared/DashboardNavbar";
 import { useThemeContext } from "@/context/ThemeContext";
-import React from "react";
+import { getClerkUser } from "@/lib/actions/user.action";
+import { IUser } from "@/models/user.model";
+import { auth } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const { theme }: any = useThemeContext();
+  const [user, setUser] = useState<IUser>();
+
+  const router = useRouter();
+  const getUser = async () => {
+    try {
+      const clerkUser: IUser = await getClerkUser();
+      setUser(clerkUser);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  getUser();
+
+  useEffect(() => {
+    if (user && user?.role !== "admin") {
+      router.push("/");
+    }
+  }, [user, router]);
+  // const { theme }: any = useThemeContext();
+
   return (
-    <div
-      className={` flex min-h-screen w-full  ${theme === "dark" && "gradient"}`}
-    >
+    <div className={` flex min-h-screen w-full `}>
       <div className=" max-md:hidden">
         <DashboardSidebar />
       </div>

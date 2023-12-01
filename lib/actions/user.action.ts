@@ -199,3 +199,16 @@ export async function createUserWithSessionIfNotExist(
     console.log(error);
   }
 }
+
+export async function getClerkUser() {
+  try {
+    await connectToDatabase();
+    const { userId } = auth();
+    const user = await User.findOne({ clerkId: userId });
+    console.log("clerk user = ", user);
+
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -1,5 +1,7 @@
 import DashboardItemCard from "@/components/dashboard/DashboardItemCard";
 import { getModelsDocumentsCount } from "@/lib/actions/dashboard.action";
+import { getClerkUser } from "@/lib/actions/user.action";
+import { auth } from "@clerk/nextjs";
 import React from "react";
 
 const page = async () => {

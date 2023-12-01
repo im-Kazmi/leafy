@@ -34,8 +34,6 @@ export async function createPost(params: CreatePostParams) {
       imageUrl,
     });
 
-    console.log(post);
-
     revalidatePath("/");
   } catch (error) {
     console.log(error);

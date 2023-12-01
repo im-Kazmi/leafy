@@ -28,10 +28,13 @@ const EditUserModal = ({ userId, username, userRole }: any) => {
 
   const UpdateUser = async () => {
     try {
-      if (username.toString().trim() !== inputValue.trim()) {
-        setError("name mismatched! try again");
-        return;
-      }
+      // if (
+      //   inputValue !== "guest" &&
+      //   username.toString().trim() !== inputValue.trim()
+      // ) {
+      //   setError("name mismatched! try again");
+      //   return;
+      // }
       await updateUserRole(JSON.parse(userId), role, pathname);
       setIsOpen(false);
     } catch (error) {

@@ -18,7 +18,7 @@ import EditUserModal from "@/components/modals/edit-user.modal";
 import { getClerkUsers } from "@/lib/actions/clerk.action";
 
 const page = async ({ searchParams }: any) => {
-  const users: any = await getClerkUsers();
+  const { users }: any = await getUsers({ pageSize: 10, page: 1 });
 
   const { userId } = auth();
   return (
@@ -47,9 +47,7 @@ const page = async ({ searchParams }: any) => {
                     className=" rounded-full"
                   />
                 </TableCell>
-                <TableCell className=" ">
-                  {user?.firstName + " " + user?.lastName}
-                </TableCell>
+                <TableCell className=" ">{user?.fullname}</TableCell>
                 <TableCell className="">
                   {moment(user.createdAt).fromNow()}
                 </TableCell>

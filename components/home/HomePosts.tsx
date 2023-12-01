@@ -16,7 +16,6 @@ interface Post {
 }
 const HomePosts = async () => {
   const posts = await getAllPosts();
-  console.log(posts);
   return (
     <div className=" flex flex-col w-full gap-5 ">
       {/* <div className="w-60  self-end">

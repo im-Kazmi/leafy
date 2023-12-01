@@ -1,4 +1,8 @@
-import { authMiddleware } from "@clerk/nextjs";
+import { authMiddleware, redirectToSignIn } from "@clerk/nextjs";
+import { NextResponse } from "next/server";
+import User, { IUser } from "./models/user.model";
+import { getClerkUser, getCurrentUser } from "./lib/actions/user.action";
+import connectToDatabase from "./utils/connectDb";
 
 export default authMiddleware({
   publicRoutes: [
