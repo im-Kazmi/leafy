@@ -142,9 +142,9 @@ export async function getAdmin() {
   }
 }
 
-export const updateUserRole = async (
+export const updateUserData = async (
   userId: string,
-  role: string,
+  data: any,
   path: string
 ) => {
   try {
@@ -156,9 +156,7 @@ export const updateUserRole = async (
       throw new Error("only admin can modify users!");
     }
 
-    const userToUpdate = await User.findByIdAndUpdate(userId, {
-      role,
-    });
+    const userToUpdate = await User.findByIdAndUpdate(userId, data);
 
     console.log(userToUpdate);
     revalidatePath(path);

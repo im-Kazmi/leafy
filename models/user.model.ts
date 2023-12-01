@@ -6,6 +6,7 @@ export interface IUser extends Document {
   imageUrl: string;
   email?: string;
   password?: string;
+  bio?: string;
   role: "guest" | "moderator" | "admin";
   posts: Schema.Types.ObjectId[];
   viewedPosts: Schema.Types.ObjectId[];
@@ -16,6 +17,7 @@ const userSchema = new Schema(
     username: { type: String },
     fullname: String,
     imageUrl: String,
+    bio: String,
     email: {
       type: String,
       unique: true,

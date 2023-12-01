@@ -57,6 +57,7 @@ const page = async ({ searchParams }: any) => {
                     userId={JSON.stringify(user._id)}
                     username={user.fullname}
                     userRole={user.role}
+                    userBio={user?.bio}
                   />
                   <DeleteUserModal
                     userId={JSON.stringify(user._id)}

@@ -5,7 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { Button } from "../ui/button";
 import { deletePostById } from "@/lib/actions/post.action";
 import { RiEditBoxLine } from "react-icons/ri";
-import { updateUserRole } from "@/lib/actions/user.action";
+import { updateUserData } from "@/lib/actions/user.action";
 
 import {
   Select,
@@ -18,11 +18,12 @@ import { Input } from "../ui/input";
 import { usePathname } from "next/navigation";
 import { Span } from "next/dist/trace";
 
-const EditUserModal = ({ userId, username, userRole }: any) => {
+const EditUserModal = ({ userId, username, userRole, userBio }: any) => {
   const [isOpen, setIsOpen] = useState(true);
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
   const [role, setRole] = useState(userRole);
+  const [bio, setBio] = useState(userBio);
 
   const pathname = usePathname();
 
@@ -35,7 +36,14 @@ const EditUserModal = ({ userId, username, userRole }: any) => {
       //   setError("name mismatched! try again");
       //   return;
       // }
-      await updateUserRole(JSON.parse(userId), role, pathname);
+      await updateUserData(
+        JSON.parse(userId),
+        {
+          role,
+          bio,
+        },
+        pathname
+      );
       setIsOpen(false);
     } catch (error) {
       console.log(error);
@@ -88,6 +96,13 @@ const EditUserModal = ({ userId, username, userRole }: any) => {
             {error && <span className=" text-red-400">{error}</span>}
           </div>
         )}
+        <textarea
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
+          className="w-full border outline-none py-3 px-5 bg-transparent rounded-md mt-3 "
+          placeholder="Bio"
+          rows={8}
+        ></textarea>
         <Button onClick={UpdateUser} className=" bg-red-500 mt-5 text-white">
           Save changes
         </Button>

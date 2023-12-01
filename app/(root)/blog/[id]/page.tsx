@@ -13,6 +13,8 @@ import { toast, Toaster } from "react-hot-toast";
 import ShareLink from "@/components/shared/ShareLink";
 import NewsLetter from "@/components/shared/NewsLetter";
 import UserCard from "@/components/shared/UserCard";
+import Link from "next/link";
+import ArrowLeft from "@/components/shared/ArrowLeft";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -25,16 +27,14 @@ const Page = async ({ params }: any) => {
   const post = await getPostById(id);
 
   return (
-    <div className={`flex  min-h-screen ${poppins.className}`}>
+    <div className={`flex bg-opacity-50 min-h-screen ${poppins.className}`}>
       <Toaster />
       <div className="container w-full flex flex-col justify-center items-center py-10 max-w-[900px] ">
         <span className="text-xs my-5 dark:text-white text_gradient hover:border-b cursor-pointer">
           @{post?.category}
         </span>
         <div className=" flex justify-between lg:max-w-[800px]">
-          <span className="text-2xl cursor-pointer hover:animate-pulse">
-            <GoArrowLeft />
-          </span>
+          <ArrowLeft />
           <h1 className="text-4xl font-lightbold  title dark:text-white text-center font-bold">
             {post.title}
           </h1>
