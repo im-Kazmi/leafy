@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import DashboardNavbar from "@/components/shared/DashboardNavbar";
@@ -5,13 +6,14 @@ import { useThemeContext } from "@/context/ThemeContext";
 import { getClerkUser } from "@/lib/actions/user.action";
 import { IUser } from "@/models/user.model";
 import { auth } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<IUser>();
 
   const router = useRouter();
+  const pathname = usePathname();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,14 +25,12 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     };
 
     fetchData();
-  }, []);
+  }, [router, pathname]);
 
   if (user && user?.role !== "admin") {
-    // Redirect immediately
     router.push("/");
-    return null; // Render nothing while redirecting
+    return null;
   }
-  // const { theme }: any = useThemeContext();
   return (
     <div className={` flex min-h-screen w-full `}>
       {user && user.role === "admin" ? (
@@ -43,7 +43,13 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             <div className="px-10 flex  w-full mt-5">{children}</div>
           </div>
         </div>
-      ) : null}
+      ) : (
+        <div className="flex w-full justify-center text-neutral-600 items-center flex-col bg-neutral-50">
+          <h1 className=" text-3xl font-extrabold  ">
+            I'm not a complete <span className="text_gradient2">idiot</span>{" "}
+          </h1>
+        </div>
+      )}
     </div>
   );
 };

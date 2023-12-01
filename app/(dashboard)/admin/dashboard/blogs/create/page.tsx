@@ -6,7 +6,7 @@ const CreatePost = async () => {
 
   return (
     <div className=" flex w-full flex-col gap-3 lg:px-20">
-      <h1 className=" font-extrabold text-3xl">Create Post</h1>
+      <h1 className=" font-extrabold text-3xl text_gradient2">Create Post</h1>
       <CreatePostForm categories={JSON.stringify(categories)} />
     </div>
   );

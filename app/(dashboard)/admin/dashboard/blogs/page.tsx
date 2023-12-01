@@ -18,6 +18,7 @@ import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
 import { deletePostById } from "@/lib/actions/post.action";
 import DeletePostModal from "@/components/modals/delete-post.model";
+import Link from "next/link";
 
 const page = async ({ searchParams }: any) => {
   const { posts, isNext }: any = await getAllPosts({
@@ -27,6 +28,15 @@ const page = async ({ searchParams }: any) => {
 
   return (
     <div className=" w-full">
+      <div className=" flex w-full justify-between py-3">
+        <h1 className=" text-2xl font-extrabold text_gradient2">Blogs</h1>
+        <Link
+          href={"/admin/dashboard/blogs/create"}
+          className=" w-fit px-3 py-1 rounded-md bg-gradient-to-r from-orange-500 text-white to-yellow-200"
+        >
+          create new
+        </Link>
+      </div>
       <Table className="w-full">
         <TableHeader className=" w-full">
           <TableRow className=" w-full">
@@ -67,10 +77,12 @@ const page = async ({ searchParams }: any) => {
             ))}
         </TableBody>
       </Table>
-      <Pagination
-        pageNumber={searchParams.page ? +searchParams.page : 1}
-        isNext={isNext}
-      />
+      {posts && posts.length > 7 && (
+        <Pagination
+          pageNumber={searchParams.page ? +searchParams.page : 1}
+          isNext={isNext}
+        />
+      )}
     </div>
   );
 };

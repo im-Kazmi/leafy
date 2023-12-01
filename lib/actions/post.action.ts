@@ -25,6 +25,9 @@ export async function createPost(params: CreatePostParams) {
   await connectToDatabase();
   try {
     const user = await getCurrentUser();
+    if (user.role !== "admin" || user.role !== "moderator") {
+      throw new Error("only admin and moderator can create post");
+    }
     const { title, content, category, imageUrl } = params;
     const post = await Post.create({
       title,
@@ -43,6 +46,11 @@ export async function createPost(params: CreatePostParams) {
 export async function deletePostById(id: string) {
   await connectToDatabase();
   try {
+    const user = await getCurrentUser();
+
+    if (user.role !== "admin") {
+      throw new Error("only admin and moderator can create post");
+    }
     await Post.findByIdAndDelete(id);
 
     revalidatePath("/admin/dashboard/blogs");

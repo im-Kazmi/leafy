@@ -2,8 +2,6 @@ import Category from "@/models/category.model";
 import Post, { IPost } from "@/models/post.model";
 import User, { IUser } from "@/models/user.model";
 import connectToDatabase from "@/utils/connectDb";
-import { FilterQuery } from "mongoose";
-import { Limelight } from "next/font/google";
 
 export async function getModelsDocumentsCount() {
   try {

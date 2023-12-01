@@ -137,7 +137,11 @@ export async function getAdmin() {
       throw new Error("only admin can do this stuff");
     }
 
-    return admin;
+    if (admin) {
+      return true;
+    } else {
+      return false;
+    }
   } catch (error) {
     console.log(error);
   }
@@ -151,11 +155,11 @@ export const updateUserRole = async (
   try {
     await connectToDatabase();
 
-    // const admin = await getAdmin();
+    const isAdmin = await getAdmin();
 
-    // if (!admin) {
-    //   throw new Error("only admin can modify users!");
-    // }
+    if (!isAdmin) {
+      throw new Error("only admin can modify users!");
+    }
 
     const userToUpdate = await User.findByIdAndUpdate(userId, {
       role,
@@ -168,45 +172,11 @@ export const updateUserRole = async (
   }
 };
 
-interface CreateUserWithSessionIfNotExist {
-  clerkId: string;
-}
-
-export async function createUserWithSessionIfNotExist(
-  params: CreateUserWithSessionIfNotExist
-) {
-  try {
-    await connectToDatabase();
-
-    const { clerkId } = params;
-
-    const user = await clerkClient.users.getUser(clerkId);
-
-    const userExists = await User.findOne({ clerkId: user.id });
-
-    if (userExists) {
-      throw new Error("User alread exits dont need to create one");
-    }
-
-    await User.create({
-      clerkId: user.id,
-      fullname: ` ${user.firstName} ${user.lastName ? user.lastName : ""}`,
-      username: user.username!,
-      email: user.emailAddresses[0].emailAddress,
-      imageUrl: user.imageUrl,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 export async function getClerkUser() {
   try {
     await connectToDatabase();
     const { userId } = auth();
     const user = await User.findOne({ clerkId: userId });
-    console.log("clerk user = ", user);
-
     return user;
   } catch (error) {
     console.log(error);

@@ -3,7 +3,6 @@ import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import {
   createUser,
-  createUserWithSessionIfNotExist,
   deleteUser,
   updateUser,
 } from "@/lib/actions/user.action";
