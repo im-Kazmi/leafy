@@ -81,11 +81,6 @@ interface UpdateUserParams {
 export async function updateUser(params: UpdateUserParams) {
   try {
     await connectToDatabase();
-    const isAdmin = await getAdmin();
-
-    if (!isAdmin) {
-      throw new Error("Only admin can modify users");
-    }
     const user = await User.findOneAndUpdate(
       { clerkId: params.clerkId },
       params
