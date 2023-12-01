@@ -16,7 +16,6 @@ import moment from "moment";
 import Pagination from "@/components/shared/Pagination";
 import Modal from "@/components/shared/Modal";
 import { Button } from "@/components/ui/button";
-import { deletePostById } from "@/lib/actions/post.action";
 import DeletePostModal from "@/components/modals/delete-post.model";
 import Link from "next/link";
 

@@ -110,3 +110,7 @@
 .cl-internal-b3fm6y{
   display: none;
 }
+.postbg {
+  background-image: url("/assets/images/postbg.svg");
+  background-size: cover;
+}

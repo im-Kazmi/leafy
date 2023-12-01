@@ -4,7 +4,7 @@ import HomePosts from "@/components/home/HomePosts";
 
 export default function Home() {
   return (
-    <main className=" w-full flex justify-center flex-col  ">
+    <main className=" mt-16 w-full h-full px-10 flex flex-col min-h-screen text-black  ">
       <Hero />
       {/* <FeaturePost /> */}
       <HomePosts />
