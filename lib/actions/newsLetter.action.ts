@@ -18,7 +18,7 @@ export const addUsertoNewsletter = async (email: string) => {
       throw new Error("user not found!");
     }
 
-    const userAlreadyExists = await NewsLetter.findOne({ email: user.email });
+    const userAlreadyExists = await NewsLetter.findOne({ email });
 
     if (userAlreadyExists) {
       throw new Error("user already exists in newsletter");
