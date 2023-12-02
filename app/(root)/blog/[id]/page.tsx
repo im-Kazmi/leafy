@@ -27,7 +27,9 @@ const Page = async ({ params }: any) => {
   const post = await getPostById(id);
 
   return (
-    <div className={`flex bg-opacity-50 min-h-screen ${poppins.className}`}>
+    <div
+      className={`flex min-h-screen bg-slate-100 dark:bg-neutral-900  bg-opacity-70 ${poppins.className}`}
+    >
       <Toaster />
       <div className="container w-full flex flex-col justify-center items-center py-10 max-w-[900px] ">
         <span className="text-xs my-5 dark:text-white text_gradient hover:border-b cursor-pointer">

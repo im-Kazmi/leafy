@@ -33,7 +33,7 @@ const PostCard = ({ post }: { post: Post }) => {
             width={400}
             height={200}
             alt=""
-            className="rounded-t-sm opacity-50 max-h-[390px] min-h-[390px]  rounded-md object-cover"
+            className="rounded-t-sm opacity-80 max-h-[390px] min-h-[390px]  rounded-md object-cover"
           />
 
           <div className=" flex flex-col gap-2 absolute bottom-0 px-5 py-2">

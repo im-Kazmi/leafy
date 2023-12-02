@@ -4,6 +4,8 @@ import connectToDatabase from "@/utils/connectDb";
 import { auth } from "@clerk/nextjs";
 import { getCurrentUser } from "./user.action";
 import { revalidatePath } from "next/cache";
+import NewsLetter from "@/models/newletter.model";
+import { sendMail } from "@/utils/sendMail";
 
 export async function getAllPosts() {
   await connectToDatabase();
@@ -28,6 +30,8 @@ export async function createPost(params: CreatePostParams) {
     // if (user.role !== "admin" || user.role !== "moderator") {
     //   throw new Error("only admin and moderator can create post");
     // }
+    const newsLetterUsers = await NewsLetter.find().populate("users");
+
     const { title, content, category, imageUrl } = params;
     const post = await Post.create({
       title,
@@ -37,6 +41,19 @@ export async function createPost(params: CreatePostParams) {
       imageUrl,
     });
 
+    if (post) {
+      for (let user of newsLetterUsers) {
+        await sendMail({
+          to: user.email,
+          subject: "🌿 New Post Notification from Leafy",
+          html: `
+            <h1>${post.title}</h1>
+            <p>${post.content}</p>
+            <img src="${post.imageUrl}" alt="Post Image">
+          `,
+        });
+      }
+    }
     revalidatePath("/");
   } catch (error) {
     console.log(error);
@@ -60,7 +77,7 @@ export async function deletePostById(id: string) {
 export async function getPostById(id: string) {
   await connectToDatabase();
   try {
-    const post = await Post.findById(id).populate('author');
+    const post = await Post.findById(id).populate("author");
 
     return post;
   } catch (error) {

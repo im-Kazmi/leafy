@@ -23,9 +23,9 @@ const HomePosts = async () => {
       </div> */}
       <div className="flex gap-3  py-5 flex-col ">
         <div className=" flex gap-10">
-          <h1 className=" text-2xl font-extrabold text-neutral-800 dark:text-white ">
+          {/* <h1 className=" text-2xl font-extrabold text-neutral-800 dark:text-white ">
             All Posts
-          </h1>
+          </h1> */}
           <div className=" gap-3 flex">
             {postsFilters.map((filter) => {
               return (
