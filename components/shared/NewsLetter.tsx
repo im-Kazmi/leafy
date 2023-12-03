@@ -47,7 +47,7 @@ const NewsLetter = () => {
         Subscribe to our Newletter and stay up to date with
         <span className=" text_gradient2"> Articles</span> and so much more
       </p>
-      <div className=" flex gap-2 w-full">
+      <div className=" flex gap-2 w-fullflex">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
